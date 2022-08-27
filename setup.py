@@ -4,13 +4,14 @@ import os
 
 from setuptools import find_packages, setup
 
-PACKAGE_NAME = "pyflies-ls-server"
+PACKAGE_NAME = "pyflies-ls"
 VERSION = "0.0.1"
 AUTHOR = "Dejan Šorgić"
 AUTHOR_EMAIL = "dejans1224@gmail.com"
 DESCRIPTION = "a language server for pyFlies language"
 KEYWORDS = "pyFlies DSL python domain specific languages language server protocol pygls"
-URL = "https://github.com/pyflies/vscode-pyflies/tree/main/server"
+LICENSE = "MIT"
+URL = "https://github.com/DejanS24/pyflies-LS"
 
 packages = find_packages()
 
