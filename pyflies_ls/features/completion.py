@@ -48,9 +48,8 @@ def resolve_completion_items(server, snippets, position, doc):
 
     for snippet in snippets.values():
 
-        if server.context_completion:
-            if check_snippet(snippet, mm, doc.source, offset) is False:
-                continue
+        if check_snippet(snippet, mm, doc.source, offset) is False:
+            continue
 
         completion_items.append(
             CompletionItem(

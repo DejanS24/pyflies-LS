@@ -42,10 +42,6 @@ class PyfliesLanguageServer(LanguageServer):
 
     def __init__(self):
         super().__init__()
-        self.context_completion = False
-
-    def set_context_completion(self):
-        self.context_completion = True
 
 
 def _validate(ls, params):
@@ -88,7 +84,7 @@ async def did_open(ls, params: DidOpenTextDocumentParams):
 
 @pyflies_server.feature(DEFINITION)
 def definitions(ls, params: DefinitionParams):
-    text_doc = ls.workspace.get_document(params.text_document.uri)
+    text_doc = load_document(ls, params.text_document.uri)
     name = get_entire_string_from_index(
         text_doc.offset_at_position(params.position), text_doc.source
     )
@@ -98,7 +94,7 @@ def definitions(ls, params: DefinitionParams):
 
 @pyflies_server.feature(REFERENCES)
 def references(ls, params: ReferenceParams):
-    text_doc = ls.workspace.get_document(params.text_document.uri)
+    text_doc = load_document(ls, params.text_document.uri)
     name = get_entire_string_from_index(
         text_doc.offset_at_position(params.position), text_doc.source
     )
