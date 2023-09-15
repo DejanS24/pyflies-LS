@@ -5,8 +5,8 @@ import os
 from setuptools import find_packages, setup
 
 PACKAGE_NAME = "pyflies-ls"
-VERSION = "0.0.1"
-AUTHOR = "Dejan Šorgić"
+VERSION = "0.0.2"
+AUTHOR = "Dejan Sorgic"
 AUTHOR_EMAIL = "dejans1224@gmail.com"
 DESCRIPTION = "a language server for pyFlies language"
 KEYWORDS = "pyFlies DSL python domain specific languages language server protocol pygls"
@@ -33,7 +33,7 @@ setup(
     keywords=KEYWORDS,
     packages=packages,
     include_package_data=True,
-    install_requires=["pygls==0.11.2", "textx", "pyflies"],
+    install_requires=["pygls==1.0.2", "textx", "pyflies"],
     classifiers=[
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",

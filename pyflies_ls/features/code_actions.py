@@ -1,10 +1,11 @@
 import difflib
-from pygls.lsp import (
-    CodeAction,
-    CodeActionKind,
-    WorkspaceEdit,
-    TextEdit
-)
+from lsprotocol import types as lsp
+# from pygls.lsp import (
+#     CodeAction,
+#     CodeActionKind,
+#     WorkspaceEdit,
+#     TextEdit
+# )
 from ..util import load_document, load_document_source
 
 
@@ -21,12 +22,12 @@ def process_quick_fix(ls, diag, text_document):
         if new_text == None:
             return None
 
-        fix = CodeAction(
+        fix = lsp.CodeAction(
             title="Fix typo",
-            kind=CodeActionKind.QuickFix,
-            edit=WorkspaceEdit(
+            kind=lsp.CodeActionKind.QuickFix,
+            edit=lsp.WorkspaceEdit(
                 changes={
-                    text_document.uri: [TextEdit(range=diag.range, new_text=new_text)]
+                    text_document.uri: [lsp.TextEdit(range=diag.range, new_text=new_text)]
                 }
             ),
         )

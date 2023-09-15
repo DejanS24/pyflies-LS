@@ -1,7 +1,7 @@
 import json
 import re
 
-from pygls.lsp.types.language_features import completion
+from lsprotocol import types as lsp
 from textx.exceptions import TextXError, TextXSyntaxError
 from textx import metamodel_for_language
 from ..util import load_snippets, load_document, get_model_from_source
