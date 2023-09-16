@@ -1,18 +1,12 @@
 import json
 import re
 
+import logging
 from lsprotocol import types as lsp
 from textx.exceptions import TextXError, TextXSyntaxError
 from textx import metamodel_for_language
 from ..util import load_snippets, load_document, get_model_from_source
 from .validate import construct_diagnostic, validate
-from pygls.lsp import (
-    CompletionList,
-    CompletionItem,
-    CompletionParams,
-    CompletionItemKind,
-    InsertTextFormat,
-)
 
 
 def filter_snippets(doc, position, snippets: json):
@@ -31,9 +25,12 @@ def check_snippet(snippet, metamodel, model, offset):
     test_body = re.sub("\${([0-9]:[A-Za-z]*|[0-9])}", "var1", snippet_body)
     test_source = model[: offset - 1] + test_body + model[offset:]
 
+    logging.info("Check snippet " + snippet_body)
+
     try:
         metamodel.model_from_str(test_source)
     except TextXError as err:
+        logging.info("snippet failed " + snippet_body)
         if err.__class__ == TextXSyntaxError:
             return False
 
@@ -52,21 +49,21 @@ def resolve_completion_items(server, snippets, position, doc):
             continue
 
         completion_items.append(
-            CompletionItem(
+            lsp.CompletionItem(
                 label=snippet["prefix"],
-                kind=CompletionItemKind.Snippet,
+                kind=lsp.CompletionItemKind.Snippet,
                 insert_text=snippet["body"],
-                insert_text_format=InsertTextFormat.Snippet,
+                insert_text_format=lsp.InsertTextFormat.Snippet,
             )
         )
 
     return completion_items
 
 
-def process_completions(server, params: CompletionParams):
+def process_completions(server, params: lsp.CompletionParams):
 
     doc = load_document(server, params.text_document.uri)
     snippets = filter_snippets(doc, params.position, load_snippets())
     completion_items = resolve_completion_items(server, snippets, params.position, doc)
 
-    return CompletionList(is_incomplete=False, items=completion_items)
+    return lsp.CompletionList(is_incomplete=False, items=completion_items)

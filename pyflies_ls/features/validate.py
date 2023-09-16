@@ -4,8 +4,6 @@ from textx.exceptions import TextXError
 from textx import metamodel_for_language
 from pyflies.exceptions import PyFliesException
 from lsprotocol import types as lsp
-# from pygls.lsp.types import Diagnostic, Range, Position
-
 
 def construct_diagnostic(msg, col, line):
     return lsp.Diagnostic(

@@ -14,6 +14,11 @@
         "prefix": "flow",
         "body": "flow {\n\tshow ${1:name}\n\texecute ${2:name}\n\t${0}\n}"
     },
+    "target": {
+        "scope": "pyflies",
+        "prefix": "target",
+        "body": "target ${1:name} {\n\t\n}"
+    },
     "image": {
         "scope": "pyflies",
         "prefix": "image",

@@ -2,7 +2,6 @@ import imp
 import re
 from textx import get_children
 from lsprotocol import types as lsp
-# from pygls.lsp.types.basic_structures import Location, Range, Position
 from ..util import get_model_from_source
 
 def pos_to_range(position, name_len):

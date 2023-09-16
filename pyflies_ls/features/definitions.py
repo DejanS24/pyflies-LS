@@ -2,7 +2,6 @@ from turtle import screensize
 from unittest import case
 from textx import metamodel_for_language
 from lsprotocol import types as lsp
-# from pygls.lsp import Location, Range, Position
 from ..util import get_model_from_source
 
 

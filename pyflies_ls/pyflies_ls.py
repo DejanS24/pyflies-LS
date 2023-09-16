@@ -1,30 +1,6 @@
 from typing import List, Optional, Union
 from pygls.server import LanguageServer
 from lsprotocol import types as lsp
-# from pygls.lsp import (
-#     CODE_ACTION
-# )
-
-# from pygls.lsp.methods import (
-#     COMPLETION,
-#     DEFINITION,
-#     TEXT_DOCUMENT_DID_CHANGE,
-#     CODE_ACTION,
-#     TEXT_DOCUMENT_DID_OPEN,
-#     REFERENCES,
-# )
-# from pygls.lsp import (
-#     CompletionParams,
-#     DefinitionParams,
-#     DidChangeTextDocumentParams,
-#     DidOpenTextDocumentParams,
-#     CodeActionOptions,
-#     CodeActionKind,
-#     CodeActionParams,
-#     CodeAction,
-#     Command,
-#     ReferenceParams,
-# )
 from .features.validate import validate
 from .features.completion import process_completions
 from .features.code_actions import process_quick_fix
@@ -42,7 +18,7 @@ class PyfliesLanguageServer(LanguageServer):
     """
 
     def __init__(self):
-        super().__init__()
+        super().__init__("pyflies_ls", "0.0.3")
 
 
 def _validate(ls, params):
@@ -57,7 +33,7 @@ pyflies_server = PyfliesLanguageServer()
 
 
 @pyflies_server.feature(lsp.TEXT_DOCUMENT_COMPLETION)
-def completions(ls, params: lsp.CompletionRequest):
+def completions(ls, params: lsp.TextDocumentCompletionRequest):
     """Returns completion items."""
 
     return process_completions(ls, params)

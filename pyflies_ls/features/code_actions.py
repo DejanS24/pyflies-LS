@@ -1,11 +1,5 @@
 import difflib
 from lsprotocol import types as lsp
-# from pygls.lsp import (
-#     CodeAction,
-#     CodeActionKind,
-#     WorkspaceEdit,
-#     TextEdit
-# )
 from ..util import load_document, load_document_source
 
 
