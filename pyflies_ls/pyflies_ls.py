@@ -59,6 +59,10 @@ async def did_open(ls, params: lsp.DidOpenTextDocumentParams):
 
 @pyflies_server.feature(lsp.TEXT_DOCUMENT_DEFINITION)
 def definitions(ls, params: lsp.DefinitionParams):
+    """
+    Return a definition location for a symbol
+    """
+
     text_doc = load_document(ls, params.text_document.uri)
     name = get_entire_string_from_index(
         text_doc.offset_at_position(params.position), text_doc.source
@@ -69,6 +73,10 @@ def definitions(ls, params: lsp.DefinitionParams):
 
 @pyflies_server.feature(lsp.TEXT_DOCUMENT_REFERENCES)
 def references(ls, params: lsp.ReferenceParams):
+    """
+    Return a list of references for a symbol
+    """
+
     text_doc = load_document(ls, params.text_document.uri)
     name = get_entire_string_from_index(
         text_doc.offset_at_position(params.position), text_doc.source
@@ -83,6 +91,11 @@ def references(ls, params: lsp.ReferenceParams):
 def code_actions(
     ls, params: lsp.CodeActionParams
 ) -> Optional[List[Union[lsp.Command, lsp.CodeAction]]]:
+    """
+    Check if there is a daignostic.
+    If the diagnostic reports a typo, offer a quick fix action.
+    """
+
     diag = params.context.diagnostics
     if diag.__len__() == 0:
         return None
@@ -92,5 +105,5 @@ def code_actions(
 
 @pyflies_server.command("pyflies_ls/ping")
 def _cmd_ping(ls, params) -> None:
-    """Prevent server going into IDLE state on windows (?)."""
+    """Ping PyFlies LS server."""
     pass

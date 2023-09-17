@@ -5,7 +5,7 @@ import os
 from setuptools import find_packages, setup
 
 PACKAGE_NAME = "pyflies-ls"
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 AUTHOR = "Dejan Sorgic"
 AUTHOR_EMAIL = "dejans1224@gmail.com"
 DESCRIPTION = "a language server for pyFlies language"
