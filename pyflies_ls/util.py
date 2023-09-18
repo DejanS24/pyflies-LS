@@ -1,6 +1,5 @@
 import json
 from textx import metamodel_for_language
-from pygls.lsp.types.basic_structures import Range, Position
 
 
 def load_document(ls, uri):

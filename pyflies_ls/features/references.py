@@ -1,13 +1,13 @@
 import imp
 import re
 from textx import get_children
-from pygls.lsp.types.basic_structures import Location, Range, Position
+from lsprotocol import types as lsp
 from ..util import get_model_from_source
 
 def pos_to_range(position, name_len):
-    return Range(
-        start=Position(line=position[0] - 1, character=position[1] - 1),
-        end=Position(line=position[0] - 1, character=position[1] - 1 + name_len),
+    return lsp.Range(
+        start=lsp.Position(line=position[0] - 1, character=position[1] - 1),
+        end=lsp.Position(line=position[0] - 1, character=position[1] - 1 + name_len),
     )
 
 def is_routine(name, m):
@@ -65,7 +65,7 @@ def resolve_references(model, param_name, uri):
     refs = []
     for o in occurences:
         refs.append(
-            Location(
+            lsp.Location(
                 uri=uri,
                 range=pos_to_range(
                     m._tx_parser.pos_to_linecol(o), param_name.__len__()

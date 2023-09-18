@@ -3,14 +3,13 @@ from typing import List, Union
 from textx.exceptions import TextXError
 from textx import metamodel_for_language
 from pyflies.exceptions import PyFliesException
-from pygls.lsp.types import Diagnostic, Range, Position
-
+from lsprotocol import types as lsp
 
 def construct_diagnostic(msg, col, line):
-    return Diagnostic(
-        range=Range(
-            start=Position(line=line - 1, character=col - 1),
-            end=Position(line=line - 1, character=col),
+    return lsp.Diagnostic(
+        range=lsp.Range(
+            start=lsp.Position(line=line - 1, character=col - 1),
+            end=lsp.Position(line=line - 1, character=col),
         ),
         message=msg,
         source="pyFlies LS",
